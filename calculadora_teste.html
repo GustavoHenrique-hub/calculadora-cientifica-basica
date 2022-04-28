@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculating...</title>
+
+    <style>
+        body {
+            background-color: aqua;
+            font: normal 20pt Arial;
+        }
+
+        div#main {
+            width: 300px;
+            height: 415px;
+            background-color: aquamarine;
+            border-style: solid;
+            border-color: white;
+            border-radius: 15px;
+            margin: 0 auto;
+
+        }
+
+        div#show {
+            width: 90%;
+            height: 60px;
+            background-color: rgb(109, 193, 241);
+            margin: 0 auto;
+            margin-top: 10px;
+            border-style: solid;
+            border-color: white;
+            border-radius: 10px;
+            font: 20pt Trebuchet MS, sans-serif;
+            padding: 5px;
+            padding-top: 5px;
+        }
+
+        div#keyboard {
+            width: 90%;
+            height: 300px;
+            background-color: rgb(42, 165, 236);
+            margin: 0 auto;
+            margin-top: 5px;
+            border-style: solid;
+            border-color: white;
+            border-radius: 10px;
+            font: bold 15pt Trebuchet MS, sans-serif;
+            padding: 5px;
+        }
+
+        .button {
+            background-color: rgb(36, 134, 190);
+            border-style: none;
+            border-radius: 7px;
+            width: 63px;
+            height: 45.5px;
+            cursor: pointer;
+            outline: none;
+            font: bold 15pt Trebuchet MS, sans-serif;
+            transition: background .3s;
+        }
+
+        .button:hover{
+            background-color: rgb(44, 174, 235);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="main">
+
+
+        <div id="show">
+
+
+        </div>
+
+        <div id="keyboard">
+            <table>
+
+                <!-- FIRST LINE -->
+                <tr>
+                    <td><button class="button" onclick="percent()">%</button></td>
+                    <td><button class="button" onclick="deleting()">CE</button></td>
+                    <td><button class="button" onclick="deleting()">C</button></td>
+                    <td><button class="button" onclick="del()">␡</button></td>
+                </tr>
+
+                <!-- SECOND LINE -->
+                <tr>
+                    <td><button class="button" onclick="decimal()">1/x</button></td>
+                    <td><button class="button" onclick="potency()">x²</button></td>
+                    <td><button class="button" onclick="sqrt()">²√</button></td>
+                    <td><button class="button" onclick="opereations('/')">÷</button></td>
+                </tr>
+
+                <!-- THIRD LINE -->
+                <tr>
+                    <td><button class="button" onclick="numbers('7')">7</button></td>
+                    <td><button class="button" onclick="numbers('8')">8</button></td>
+                    <td><button class="button" onclick="numbers('9')">9</button></td>
+                    <td><button class="button" onclick="opereations('*')">×</button></td>
+                </tr>
+
+                <!-- FOURTH LINE -->
+                <tr>
+                    <td><button class="button" onclick="numbers('4')">4</button></td>
+                    <td><button class="button" onclick="numbers('5')">5</button></td>
+                    <td><button class="button" onclick="numbers('6')">6</button></td>
+                    <td><button class="button" onclick="opereations('-')">-</button></td>
+                </tr>
+
+                <!-- FIFTH LINE -->
+                <tr>
+                    <td><button class="button" onclick="numbers('1')">1</button></td>
+                    <td><button class="button" onclick="numbers('2')">2</button></td>
+                    <td><button class="button" onclick="numbers('3')">3</button></td>
+                    <td><button class="button" onclick="opereations('+')">+</button></td>
+                </tr>
+
+                <!-- SIXTH LINE -->
+                <tr>
+                    <td><button class="button" onclick="more_or_less()">+/-</button></td>
+                    <td><button class="button" onclick="numbers('0')">0</button></td>
+                    <td><button class="button" onclick="numbers('.')">.</button></td>
+                    <td><button class="button" onclick="equal()">=</button></td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+
+    <script>
+
+
+        //Calculating
+        function equal() {
+            let result = document.getElementById('show').innerHTML
+            if (result) {
+                document.getElementById('show').innerHTML = eval(result).toFixed(3)
+            }
+        }
+
+        //Numbers
+        function numbers(num) {
+            let numbers = document.getElementById('show').innerHTML
+            document.getElementById('show').innerHTML = numbers + num
+
+        }
+
+        //Show operation
+        function opereations(num) {
+            let operations = document.getElementById('show').innerHTML
+            document.getElementById('show').innerHTML = operations + num
+        }
+
+        //Clean result area and delete the last number
+        function deleting() {
+            document.getElementById('show').innerHTML = ""
+        }
+        function del() {
+            let result = document.getElementById('show').innerHTML
+            document.getElementById('show').innerHTML = result.substring(0, result.length - 1)
+        }
+
+
+        //Special Calculations
+        function more_or_less() {
+            let result = document.getElementById('show').innerHTML
+            if (result) {
+                document.getElementById('show').innerHTML = result * (-1).toFixed(3)
+            }
+        }
+
+        function percent() {
+            let result = document.getElementById('show').innerHTML
+            if (result) {
+                document.getElementById('show').innerHTML = (result / 100).toFixed(3)
+            }
+        }
+
+        function decimal() {
+            let result = document.getElementById('show').innerHTML
+            if (result) {
+                document.getElementById('show').innerHTML = 1 / result.toFixed(3)
+            }
+        }
+
+        function potency() {
+            let result = document.getElementById('show').innerHTML
+            if (result) {
+                document.getElementById('show').innerHTML = Math.pow(result, 2).toFixed(3)
+            }
+
+        }
+
+        function sqrt() {
+            let result = document.getElementById('show').innerHTML
+            if (result) {
+                document.getElementById('show').innerHTML = Math.sqrt(result).toFixed(3)
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
